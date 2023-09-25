@@ -1,5 +1,12 @@
 class Talk < ApplicationRecord
-  validates :description, presence: true
-  validates :duration, presence: true
 
+  belongs_to :track
+
+  validates_presence_of :description, :time, :duration
+
+  scope :ordered, -> { order(time: :asc) }
+
+  def as_json(options = {})
+    super(options.merge(include: :track))
+  end
 end
