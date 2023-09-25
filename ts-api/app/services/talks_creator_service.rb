@@ -7,7 +7,6 @@ class TalksCreatorService
   AFTERNOON_START_TIME  = Time.parse('13:00')
   NETWORKING_START_TIME = Time.parse('17:00')
 
-
   def initialize(description, duration)
     @description = description
     @duration = duration
@@ -25,7 +24,7 @@ class TalksCreatorService
       time += 60.minutes
     end
 
-    if time >= NETWORKING_START_TIME.strftime('%H:%M')
+    if time >=  NETWORKING_START_TIME.strftime('%H:%M')
       Talk.create(description: 'Evento de Networking', time: time, duration: 60, track_id: track.id)
       time = MORNING_START_TIME.strftime('%H:%M')
       track = Track.find_or_create_by(name: "Track #{ALFABET_INDEX[Track.count]}")
